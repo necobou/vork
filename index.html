@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Kolesnikov V V</title>
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#desc').keydown(function(e) {
+			if (e.keyCode == 13) {
+				e.preventDefault();
+				$('#content').append('<div class="el"><div onclick="elem(this)"></div><div>'+this.value+'</div><div onclick="del(this)">X</div></div>')
+				load();
+			}
+		});
+	})
+	function elem(obj){
+		obj=obj.parentElement
+		if($(obj).hasClass('on')){$(obj).removeClass('on')}else{$(obj).addClass('on')}
+		load()
+	}
+	function load(){
+		$('#num1').html($('#content>div').length)
+		$('#num2').html($('#content .on').length)
+	}
+	function del(obj){
+		$(obj).parent().remove();
+		load();
+	}
+</script>
+</head><body>
+	<div id='site'>
+		<div id='bar'>Записей: <b id='num1'>0</b> Выполненых: <b id='num2'>0</b> </div>
+		<div id='adding'><div id='title'><div style='width: 160px'>Добавить элемент (Enter): </div><div><textarea id='desc' cols='40' rows='3'></textarea></div></div></div>
+		<div id='content'></div>
+	</div>
+</body></html> 
